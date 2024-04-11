@@ -8,3 +8,4 @@ class TransactionViewSet(viewsets.ModelViewSet):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
     filterset_class = TransactionFilterSet
+    ordering_fields = ["id", "txid", "amount"]

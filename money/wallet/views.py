@@ -11,6 +11,7 @@ class WalletViewSet(viewsets.ModelViewSet):
     queryset = Wallet.objects.all()
     serializer_class = WalletSerializer
     filterset_class = WalletFilterSet
+    ordering_fields = ["id", "label", "_balance"]
 
     def get_queryset(self):
         return (
