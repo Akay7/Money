@@ -17,7 +17,18 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
+from django.urls import include
+from rest_framework import routers
+from wallet.views import WalletViewSet
+from transaction.views import TransactionViewSet
+
+
+router = routers.DefaultRouter()
+router.register("wallet", WalletViewSet)
+router.register("transaction", TransactionViewSet)
+
 
 urlpatterns = [
+    path("api/v1/", include(router.urls)),
     path("admin/", admin.site.urls),
 ]
