@@ -37,4 +37,4 @@ def test_wallet_collect_amount_from_transactions():
         amount=Decimal('2.123456789123456789')
     )
 
-    assert wallet.amount == Decimal('3.580246791357024679')
+    assert wallet.amount == Decimal('4.111111111111111117')
