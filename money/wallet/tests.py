@@ -43,7 +43,7 @@ def test_view_wallets(client):
     response = client.get(WALLET_URL)
 
     assert response.status_code == 200
-    assert len(response.json()["results"]) == 10
+    assert len(response.json()["data"]) == 10
 
 
 @pytest.mark.django_db
@@ -58,8 +58,8 @@ def test_filter_wallets_by_balance_exact(client):
     response = client.get(WALLET_URL, {"balance": 10})
 
     assert response.status_code == 200
-    assert len(response.json()["results"]) == 1
-    assert response.json()["results"][0]["id"] == wallet.id
+    assert len(response.json()["data"]) == 1
+    assert response.json()["data"][0]["id"] == str(wallet.id)
 
 
 @pytest.mark.django_db
@@ -74,5 +74,5 @@ def test_filter_wallets_by_balance_range(client):
     response = client.get(WALLET_URL, {"balance__gte": 9, "balance__lte": 11})
 
     assert response.status_code == 200
-    assert len(response.json()["results"]) == 1
-    assert response.json()["results"][0]["id"] == wallet.id
+    assert len(response.json()["data"]) == 1
+    assert response.json()["data"][0]["id"] == str(wallet.id)

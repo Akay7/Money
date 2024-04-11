@@ -10,7 +10,7 @@ class Wallet(models.Model):
         return self.label
 
     @property
-    def balance(self):
+    def balance(self) -> Decimal:
         if hasattr(self, "_balance"):
             return self._balance
         return sum([t.amount for t in self.transactions.all()] or [Decimal("0.0")])

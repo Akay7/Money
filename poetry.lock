@@ -105,6 +105,28 @@ files = [
 django = ">=3.0"
 
 [[package]]
+name = "djangorestframework-jsonapi"
+version = "6.1.0"
+description = "A Django REST framework API adapter for the JSON:API spec."
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "djangorestframework-jsonapi-6.1.0.tar.gz", hash = "sha256:237a6ed3780f0b6571c838c33fde57286152166213ad2986cb1d0f45cff45425"},
+    {file = "djangorestframework_jsonapi-6.1.0-py2.py3-none-any.whl", hash = "sha256:d35fc0868ef104038882203da160c7b51216dec3f4e089cd5177bb95f9fe4af1"},
+]
+
+[package.dependencies]
+django = ">=3.2"
+django-filter = {version = ">=2.4", optional = true, markers = "extra == \"django-filter\""}
+djangorestframework = ">=3.13"
+inflection = ">=0.5.0"
+
+[package.extras]
+django-filter = ["django-filter (>=2.4)"]
+django-polymorphic = ["django-polymorphic (>=3.0)"]
+openapi = ["pyyaml (>=5.4)", "uritemplate (>=3.0.1)"]
+
+[[package]]
 name = "exceptiongroup"
 version = "1.2.0"
 description = "Backport of PEP 654 (exception groups)"
@@ -149,6 +171,17 @@ files = [
 
 [package.dependencies]
 python-dateutil = ">=2.4"
+
+[[package]]
+name = "inflection"
+version = "0.5.1"
+description = "A port of Ruby on Rails inflector to Python"
+optional = false
+python-versions = ">=3.5"
+files = [
+    {file = "inflection-0.5.1-py2.py3-none-any.whl", hash = "sha256:f38b2b640938a4f35ade69ac3d053042959b62a0f1076a5bbaa1b9526605a8a2"},
+    {file = "inflection-0.5.1.tar.gz", hash = "sha256:1a29730d366e996aaacffb2f1f1cb9593dc38e2ddd30c91250c6dde09ea9b417"},
+]
 
 [[package]]
 name = "iniconfig"
@@ -322,4 +355,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "85c2e3406ee2a6c2f8ccbd153f3239a42b0c15ecb04b33bfbb6dd99099838d48"
+content-hash = "0b46ee073486fe8b59de0954289af1c201602ed7338b826c42f5cd978952f4c2"

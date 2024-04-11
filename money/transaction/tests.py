@@ -32,7 +32,7 @@ def test_view_transactions(client):
     response = client.get(TRANSACTIONS_URL)
 
     assert response.status_code == 200
-    assert len(response.json()["results"]) == 10
+    assert len(response.json()["data"]) == 10
 
 
 @pytest.mark.django_db
@@ -43,4 +43,4 @@ def test_view_transactions_filtered_by_amount(client):
     response = client.get(TRANSACTIONS_URL, {"amount__gte": 30, "amount__lte": 55})
 
     assert response.status_code == 200
-    assert len(response.json()["results"]) == 3
+    assert len(response.json()["data"]) == 3

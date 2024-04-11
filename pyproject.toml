@@ -13,6 +13,7 @@ pytest-django = "^4.8.0"
 dj-database-url = "^2.1.0"
 mysqlclient = "^2.2.4"
 django-filter = "^24.2"
+djangorestframework-jsonapi = {extras = ["django-filter"], version = "^6.1.0"}
 
 
 [tool.poetry.group.dev.dependencies]

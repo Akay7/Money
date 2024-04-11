@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "django_filters",
+    "rest_framework_json_api",
     "wallet",
     "transaction",
 ]
@@ -137,10 +138,16 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 ## REST FRAMEWORK
 
 REST_FRAMEWORK = {
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "DEFAULT_RENDERER_CLASSES": (
+        "rest_framework_json_api.renderers.JSONRenderer",
+        "rest_framework_json_api.renderers.BrowsableAPIRenderer",
+    ),
+    "DEFAULT_METADATA_CLASS": "rest_framework_json_api.metadata.JSONAPIMetadata",
+    "DEFAULT_SCHEMA_CLASS": "rest_framework_json_api.schemas.openapi.AutoSchema",
+    "DEFAULT_PAGINATION_CLASS": "rest_framework_json_api.pagination.JsonApiPageNumberPagination",
     "PAGE_SIZE": 100,
     "DEFAULT_FILTER_BACKENDS": [
-        "rest_framework.filters.OrderingFilter",
-        "django_filters.rest_framework.DjangoFilterBackend",
+        "rest_framework_json_api.filters.OrderingFilter",
+        "rest_framework_json_api.django_filters.DjangoFilterBackend",
     ],
 }
