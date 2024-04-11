@@ -1,0 +1,57 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "docker-compose",
+            "label": "Docker-Compose: Up Dependencies",
+            "dockerCompose": {
+                "up": {
+                    "detached": true,
+                    "services": [
+                        "db"
+                    ]
+                },
+                "files": [
+                    "${workspaceFolder}/docker-compose.yml"
+                ]
+            }
+        },
+        {
+            "type": "docker-run",
+            "label": "docker-run: debug",
+            "dependsOn": [
+                "docker-build",
+                "Docker-Compose: Up Dependencies",
+            ],
+            "dockerRun": {
+                "network": "money_default",
+                "envFiles": [
+                    "${workspaceFolder}/dev.env"
+                ],
+                "ports": [
+                    {
+                        "containerPort": 8000,
+                        "hostPort": 8000
+                    }
+                ],
+                "volumes": [{
+                    "containerPath": "/app",
+                    "localPath": "${workspaceFolder}",
+                }]
+            },
+            "python": {
+                "args": ["runserver", "0.0.0.0:8000"],
+                "file": "money/manage.py"
+            }
+        },
+        {
+            "type": "docker-build",
+            "label": "docker-build",
+            "platform": "python",
+            "dockerBuild": {
+                "context": "${workspaceFolder}",
+                "file": "${workspaceFolder}/Dockerfile",
+            }
+        }
+    ]
+}

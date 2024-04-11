@@ -1,0 +1,39 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Locally: Debug Django App",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/money/manage.py",
+            "envFile": "${workspaceFolder}/local.env",
+            "args": [
+                "runserver",
+            ],
+            "django": true,
+            "justMyCode": false
+        },
+        {
+            "name": "Docker: Debug Django App",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "python": {
+                "pathMappings": [
+                    {
+                        "localRoot": "${workspaceFolder}",
+                        "remoteRoot": "/app"
+                    }
+                ],
+                "ports": [
+                    {
+                        "containerPort": 8000,
+                        "hostPort": 8000
+                    }
+                ],
+                "projectType": "django",
+                
+            }
+        }
+    ]
+}
