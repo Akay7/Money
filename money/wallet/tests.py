@@ -44,3 +44,35 @@ def test_view_wallets(client):
 
     assert response.status_code == 200
     assert len(response.json()["results"]) == 10
+
+
+@pytest.mark.django_db
+def test_filter_wallets_by_balance_exact(client):
+    empty_wallet = WalletFactory()
+    wallet = TransactionFactory(amount=Decimal("10.0")).wallet
+    wallet_with_multiple_transactions = WalletFactory()
+    TransactionFactory.create_batch(
+        3, wallet=wallet_with_multiple_transactions, amount=Decimal("10.0")
+    )
+
+    response = client.get(WALLET_URL, {"balance": 10})
+
+    assert response.status_code == 200
+    assert len(response.json()["results"]) == 1
+    assert response.json()["results"][0]["id"] == wallet.id
+
+
+@pytest.mark.django_db
+def test_filter_wallets_by_balance_range(client):
+    empty_wallet = WalletFactory()
+    wallet = TransactionFactory(amount=Decimal("10.0")).wallet
+    wallet_with_multiple_transactions = WalletFactory()
+    TransactionFactory.create_batch(
+        3, wallet=wallet_with_multiple_transactions, amount=Decimal("10.0")
+    )
+
+    response = client.get(WALLET_URL, {"balance__gte": 9, "balance__lte": 11})
+
+    assert response.status_code == 200
+    assert len(response.json()["results"]) == 1
+    assert response.json()["results"][0]["id"] == wallet.id
